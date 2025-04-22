@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\profileMail;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
-{
+{ 
+    public function index(){
+        // dd($mailer->content());  
+        Mail::to('exampl@exmao.com')->send(new profileMail());
+        return view("Email");
+    }
     public function register(){
         return view("User.Register"); 
     } 
