@@ -28,11 +28,15 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Topbar Start -->
-  
     <div class="container-fluid px-5 d-none d-lg-block">
         <div class="row gx-5 py-3 align-items-center">
             <div class="col-lg-3">
@@ -71,21 +75,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav mx-auto py-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
-                <a href="product.html" class="nav-item nav-link">Product</a>
+                <a href="#" class="nav-item nav-link active">Home</a>
+                <a href="#about" class="nav-item nav-link">About</a>
+                <a href="#services" class="nav-item nav-link">Service</a>
+                <a href="#products" class="nav-item nav-link">Product</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">
-                        <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                        <a href="detail.html" class="dropdown-item">Blog Detail</a>
-                        <a href="feature.html" class="dropdown-item">Features</a>
-                        <a href="team.html" class="dropdown-item">The Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="#blog" class="dropdown-item">Blog Grid</a>
+                        <a href="#blog" class="dropdown-item">Blog Detail</a>
+                        <a href="#features" class="dropdown-item">Features</a>
+                        <a href="#team" class="dropdown-item">The Team</a>
+                        <a href="#testimonial" class="dropdown-item">Testimonial</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="#footer" class="nav-item nav-link">Contact</a>
             </div>
         </div>
     </nav>
@@ -102,8 +106,8 @@
                         <div class="text-start p-5" style="max-width: 900px;">
                             <h3 class="text-white">Organic Vegetables</h3>
                             <h1 class="display-1 text-white mb-md-4">Organic Vegetables For Healthy Life</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
-                            <a href="" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
+                            <a href="#products" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
+                            <a href="#footer" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -113,8 +117,8 @@
                         <div class="text-start p-5" style="max-width: 900px;">
                             <h3 class="text-white">Organic Fruits</h3>
                             <h1 class="display-1 text-white mb-md-4">Organic Fruits For Better Health</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
-                            <a href="" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
+                            <a href="#products" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
+                            <a href="#footer" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -141,30 +145,30 @@
                 <div class="col-md-6">
                     <div class="bg-primary bg-vegetable d-flex flex-column justify-content-center p-5" style="height: 300px;">
                         <h3 class="text-white mb-3">Organic Vegetables</h3>
-                        <p class="text-white">Dolor magna ipsum elitr sea erat elitr amet ipsum stet justo dolor, amet lorem diam no duo sed dolore amet diam</p>
-                        <a class="text-white fw-bold" href="">Read More<i class="bi bi-arrow-right ms-2"></i></a>
+                        <p class="text-white">Our organic vegetables are grown with love and care, ensuring they are fresh, healthy, and packed with nutrients for your family.</p>
+                        <a class="text-white fw-bold" href="#products">Read More<i class="bi bi-arrow-right ms-2"></i></a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="bg-secondary bg-fruit d-flex flex-column justify-content-center p-5" style="height: 300px;">
                         <h3 class="text-white mb-3">Organic Fruits</h3>
-                        <p class="text-white">Dolor magna ipsum elitr sea erat elitr amet ipsum stet justo dolor, amet lorem diam no duo sed dolore amet diam</p>
-                        <a class="text-white fw-bold" href="">Read More<i class="bi bi-arrow-right ms-2"></i></a>
+                        <p class="text-white">Enjoy the natural sweetness of our organic fruits, grown without harmful chemicals and full of flavor.</p>
+                        <a class="text-white fw-bold" href="#products">Read More<i class="bi bi-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Banner Start -->
+    <!-- Banner End -->
 
 
     <!-- About Start -->
-    <div class="container-fluid about pt-5">
+    <div id="about" class="container-fluid about pt-5">
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div class="d-flex h-100 border border-5 border-primary border-bottom-0 pt-4">
-                        <img class="img-fluid mt-auto mx-auto" src="img/about.png">
+                        <img class="img-fluid mt-auto mx-auto" src="img/about.png" alt="About Us">
                     </div>
                 </div>
                 <div class="col-lg-6 pb-5">
@@ -172,17 +176,17 @@
                         <h6 class="text-primary text-uppercase">About Us</h6>
                         <h1 class="display-5">We Produce Organic Food For Your Family</h1>
                     </div>
-                    <p class="mb-4">Tempor erat elitr at rebum at at clita. Diam dolor diam ipsum et tempor sit. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor eirmod magna dolore erat amet magna</p>
+                    <p class="mb-4">At FarmFresh, we are committed to providing you with the freshest and healthiest organic produce. Our vegetables and fruits are grown with care, ensuring they are free from harmful chemicals and full of nutrients for your family.</p>
                     <div class="row gx-5 gy-4">
                         <div class="col-sm-6">
                             <i class="fa fa-seedling display-1 text-secondary"></i>
                             <h4>100% Organic</h4>
-                            <p class="mb-0">Labore justo vero ipsum sit clita erat lorem magna clita nonumy dolor magna dolor vero</p>
+                            <p class="mb-0">Our produce is grown naturally, without the use of synthetic fertilizers or pesticides, ensuring the best quality for your health.</p>
                         </div>
                         <div class="col-sm-6">
                             <i class="fa fa-award display-1 text-secondary"></i>
                             <h4>Award Winning</h4>
-                            <p class="mb-0">Labore justo vero ipsum sit clita erat lorem magna clita nonumy dolor magna dolor vero</p>
+                            <p class="mb-0">Recognized for our commitment to sustainability and quality, we have received numerous awards in the organic farming industry.</p>
                         </div>
                     </div>
                 </div>
@@ -193,7 +197,7 @@
 
 
     <!-- Facts Start -->
-    <div class="container-fluid bg-primary facts py-5 mb-5">
+    <div  class="container-fluid bg-primary facts py-5 mb-5">
         <div class="container py-5">
             <div class="row gx-5 gy-4">
                 <div class="col-lg-3 col-md-6">
@@ -247,7 +251,7 @@
     
 
     <!-- Services Start -->
-    <div class="container-fluid py-5">
+    <div id="services" class="container-fluid py-5">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
@@ -256,7 +260,7 @@
                         <h1 class="display-5">Organic Farm Services</h1>
                     </div>
                     <p class="mb-4">Tempor erat elitr at rebum at at clita. Diam dolor diam ipsum et tempor sit. Clita erat ipsum et lorem et sit sed stet labore</p>
-                    <a href="" class="btn btn-primary py-md-3 px-md-5">Contact Us</a>
+                    <a href="#footer" class="btn btn-primary py-md-3 px-md-5">Contact Us</a>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="service-item bg-light text-center p-5">
@@ -300,7 +304,7 @@
 
 
     <!-- Features Start -->
-    <div class="container-fluid bg-primary feature py-5 pb-lg-0 my-5">
+    <div id="features" class="container-fluid bg-primary feature py-5 pb-lg-0 my-5">
         <div class="container py-5 pb-lg-0">
             <div class="mx-auto text-center mb-3 pb-2" style="max-width: 500px;">
                 <h6 class="text-uppercase text-secondary">Features</h6>
@@ -354,7 +358,7 @@
     <!-- Products Start -->
 <!-- Products Start -->
     <!-- Products Start -->
-<div class="container-fluid py-5">
+<div id="products" class="container-fluid py-5">
   <div class="container">
       <div class="mx-auto text-center mb-5" style="max-width: 500px;">
           <h6 class="text-primary text-uppercase">Products</h6>
@@ -399,7 +403,7 @@
 
 
     <!-- Testimonial Start -->
-    <div class="container-fluid bg-testimonial py-5 my-5">
+    <div id="testimonial" class="container-fluid bg-testimonial py-5 my-5">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
@@ -425,7 +429,7 @@
 
 
     <!-- Team Start -->
-    <div class="container-fluid py-5">
+    <div id="team" class="container-fluid py-5">
         <div class="container">
             <div class="mx-auto text-center mb-5" style="max-width: 500px;">
                 <h6 class="text-primary text-uppercase">The Team</h6>
@@ -481,6 +485,8 @@
                                 <img class="img-fluid w-100" src="img/team-3.jpg" alt="">
                                 <div class="position-absolute start-0 bottom-0 w-100 py-3 px-4" style="background: rgba(52, 173, 84, .85);">
                                     <h4 class="text-white">Farmer Name</h4>
+                173,84,.85);">
+                                    <h4 class="text-white">Farmer Name</h4>
                                     <span class="text-white">Designation</span>
                                 </div>
                             </div>
@@ -502,7 +508,7 @@
 
 
     <!-- Blog Start -->
-    <div class="container-fluid py-5">
+    <div id="blog" class="container-fluid py-5">
         <div class="container">
             <div class="mx-auto text-center mb-5" style="max-width: 500px;">
                 <h6 class="text-primary text-uppercase">Our Blog</h6>
@@ -543,7 +549,7 @@
     
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-footer bg-primary text-white mt-5">
+    <div id="footer" class="container-fluid bg-footer bg-primary text-white mt-5">
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-8 col-md-6">
@@ -573,22 +579,22 @@
                             <h4 class="text-white mb-4">Quick Links</h4>
                             <div class="d-flex flex-column justify-content-start">
                                 <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Home</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>About Us</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Our Services</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Meet The Team</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Latest Blog</a>
-                                <a class="text-white" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Contact Us</a>
+                                <a class="text-white mb-2" href="#about"><i class="bi bi-arrow-right text-white me-2"></i>About Us</a>
+                                <a class="text-white mb-2" href="#services"><i class="bi bi-arrow-right text-white me-2"></i>Our Services</a>
+                                <a class="text-white mb-2" href="#team"><i class="bi bi-arrow-right text-white me-2"></i>Meet The Team</a>
+                                <a class="text-white mb-2" href="#blog"><i class="bi bi-arrow-right text-white me-2"></i>Latest Blog</a>
+                                <a class="text-white" href="#footer"><i class="bi bi-arrow-right text-white me-2"></i>Contact Us</a>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
                             <h4 class="text-white mb-4">Popular Links</h4>
                             <div class="d-flex flex-column justify-content-start">
                                 <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Home</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>About Us</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Our Services</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Meet The Team</a>
-                                <a class="text-white mb-2" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Latest Blog</a>
-                                <a class="text-white" href="#"><i class="bi bi-arrow-right text-white me-2"></i>Contact Us</a>
+                                <a class="text-white mb-2" href="#about"><i class="bi bi-arrow-right text-white me-2"></i>About Us</a>
+                                <a class="text-white mb-2" href="#services"><i class="bi bi-arrow-right text-white me-2"></i>Our Services</a>
+                                <a class="text-white mb-2" href="#team"><i class="bi bi-arrow-right text-white me-2"></i>Meet The Team</a>
+                                <a class="text-white mb-2" href="#blog"><i class="bi bi-arrow-right text-white me-2"></i>Latest Blog</a>
+                                <a class="text-white" href="#footer"><i class="bi bi-arrow-right text-white me-2"></i>Contact Us</a>
                             </div>
                         </div>
                     </div>
