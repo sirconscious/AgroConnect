@@ -42,13 +42,13 @@
             <div class="col-lg-3">
                 <div class="d-flex align-items-center justify-content-start">
                     <i class="bi bi-phone-vibrate fs-1 text-primary me-2"></i>
-                    <h2 class="mb-0">+012 345 6789</h2>
+                    <h2 class="mb-0">+212 666 666</h2>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="d-flex align-items-center justify-content-center">
                     <a href="index.html" class="navbar-brand ms-lg-5">
-                        <h1 class="m-0 display-4 text-primary"><span class="text-secondary">Farm</span>Fresh</h1>
+                        <h1 class="m-0 display-4 text-primary"><span class="text-secondary">Agro</span>Connect</h1>
                     </a>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                         <div class="text-start p-5" style="max-width: 900px;">
                             <h3 class="text-white">Organic Vegetables</h3>
                             <h1 class="display-1 text-white mb-md-4">Organic Vegetables For Healthy Life</h1>
-                            <a href="#products" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
+                            <a href="{{route("register")}}" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
                             <a href="#footer" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                         <div class="text-start p-5" style="max-width: 900px;">
                             <h3 class="text-white">Organic Fruits</h3>
                             <h1 class="display-1 text-white mb-md-4">Organic Fruits For Better Health</h1>
-                            <a href="#products" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
+                            <a href="{{route("register")}}" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
                             <a href="#footer" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ class UserController extends Controller
     }
 
  
-        return redirect()->route('home')->with('success', 'Registration successful!');
+        return redirect()->route('login')->with('success', 'Registration successful!');
 
     }
     public function login(){
@@ -43,7 +43,7 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
         ]); 
         if (auth()->attempt($credentials)) {
-            return redirect()->route('home')->with('success', 'Login successful!');
+            return redirect()->route('ListeProducts')->with('success', 'Login successful!');
         } else {
             return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
         }
