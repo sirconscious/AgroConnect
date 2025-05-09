@@ -31,7 +31,7 @@ class AdminController extends Controller
                 'farmSize' => $farm->size ?? '',
                 'farmingActivities' => $farm ? json_decode($farm->activities ?? '[]') : [],
                 'farmDescription' => $farm->description ?? '',
-                'status' => $farm->Status ?? 'pending',
+                'status' => $farmer->status ?? 'pending',
                 'dateApplied' => $farmer->created_at->format('Y-m-d'),
                 'documents' => [
                     'nationalId' => $farm && $farm->nationalId ? asset('storage/' . $farm->nationalId) : null,
@@ -71,7 +71,7 @@ class AdminController extends Controller
             'farmSize' => $farm->size ?? '',
             'farmingActivities' => $farm ? json_decode($farm->activities ?? '[]') : [],
             'farmDescription' => $farm->description ?? '',
-            'status' => $farm->Status ?? 'pending',
+            'status' => $farmer->status ?? 'pending',
             'dateApplied' => $farmer->created_at->format('Y-m-d'),
             'documents' => [
                 'nationalId' => $farm && $farm->nationalId ? asset('storage/' . $farm->nationalId) : null,
@@ -89,18 +89,14 @@ class AdminController extends Controller
     public function confirmFarmer($id)
     {
         $farmer = Farmer::findOrFail($id);
-        if ($farmer->farms) {
-            $farmer->farms->update(['Status' => 'confirmed']);
-        }
-        return response()->json(['success' => true]);
+        $farmer->update(['status' => 'confirmed']);
+        return redirect()->back()->with('success', 'Farmer confirmed successfully');
     }
 
     public function rejectFarmer($id)
     {
         $farmer = Farmer::findOrFail($id);
-        if ($farmer->farms) {
-            $farmer->farms->update(['Status' => 'rejected']);
-        }
-        return response()->json(['success' => true]);
+        $farmer->update(['status' => 'rejected']);
+        return redirect()->back()->with('success', 'Farmer rejected successfully');
     }
 }

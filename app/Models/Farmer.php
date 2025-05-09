@@ -8,7 +8,7 @@ class Farmer extends Model
 {
     protected $fillable = [ 
         "cin" , "phone" , "date_of_birth" 
-        , "address"  , "user_id" , 
+        , "address"  , "user_id" ,  "status"
     ] ;
     public function user(){
         return $this->belongsTo(User::class);

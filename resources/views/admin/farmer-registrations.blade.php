@@ -267,22 +267,46 @@
                                 </a>
                                 
                                 @if($farmer['status'] === 'pending')
-                                <button 
-                                    @click="confirmFarmer('{{ $farmer['id'] }}')"
-                                    class="p-1.5 rounded-lg text-green-600 hover:bg-green-50 transition-colors"
-                                    title="Confirm"
-                                >
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                
-                                <button 
-                                    @click="rejectFarmer('{{ $farmer['id'] }}')"
-                                    class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors"
-                                    title="Reject"
-                                >
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                @endif
+                                <a href="{{ route('admin.farmers.confirm', $farmer['id']) }}">
+
+                                    <button 
+                                        class="p-1.5 rounded-lg text-green-600 hover:bg-green-50 transition-colors"
+                                        title="Confirm"
+                                    >
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </a>
+                                <a href="{{route('admin.farmers.reject', $farmer['id'])}}">
+
+                                    <button 
+                                        @click="rejectFarmer('{{ $farmer['id'] }}')"
+                                        class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors"
+                                        title="Reject"
+                                    >
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </a>
+                                @endif 
+                                @if($farmer['status'] === 'confirmed')
+                                <a href="{{ route('admin.farmers.reject', $farmer['id']) }}">
+                                    <button 
+                                        class="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors"
+                                        title="Reject"
+                                    >   
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </a>
+                                @endif  
+                                @if($farmer['status'] === 'rejected')
+                                <a href="{{ route('admin.farmers.confirm', $farmer['id']) }}">
+                                    <button 
+                                        class="p-1.5 rounded-lg text-green-600 hover:bg-green-50 transition-colors"
+                                        title="Confirm"
+                                    >
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </a>
+                                @endif 
                             </div>
                         </td>
                     </tr>
