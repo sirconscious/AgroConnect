@@ -374,9 +374,10 @@
         </div>
         
         <!-- Registration Form -->
-        <form class="form-container bg-white bg-opacity-95 rounded-2xl shadow-xl overflow-hidden">
+        <form action="{{route("farmer.store")}}" class="form-container bg-white bg-opacity-95 rounded-2xl shadow-xl overflow-hidden" id="registrationForm" enctype="multipart/form-data" method="POST">
+            @csrf
             <!-- Section 1: Personal Information -->
-            <div class="form-section p-8 border-b border-gray-100">
+            <div class="form-section p-8 border-b border-gray-100" id="section1">
                 <h2 class="section-header text-2xl font-semibold text-gray-800 flex items-center">
                     <i class="fas fa-user-circle text-green-600 mr-3"></i> Personal Information
                 </h2>
@@ -414,8 +415,15 @@
                     </div>
                     
                     <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1 required-field">Password</label>
+                        <input type="password" id="password" name="password" required minlength="8"
+                            class="input-field w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <p class="mt-1 text-xs text-gray-500">Minimum 8 characters</p>
+                    </div>
+                    
+                    <div>
                         <label for="dob" class="block text-sm font-medium text-gray-700 mb-1 required-field">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" required
+                        <input type="date" id="dob" name="date_of_birth" required
                             class="input-field w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                     </div>
                 </div>
@@ -426,10 +434,16 @@
                         class="input-field w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
                     <p class="mt-1 text-xs text-gray-500">Address must match the rural/agricultural area on your CIN</p>
                 </div>
+
+                <div class="flex justify-end mt-8">
+                    <button type="button" class="btn-primary px-8 py-3 rounded-lg text-center font-semibold" onclick="nextSection(1)">
+                        Next Section <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
             </div>
             
             <!-- Section 2: Farm Details -->
-            <div class="form-section p-8 border-b border-gray-100">
+            <div class="form-section p-8 border-b border-gray-100 hidden" id="section2">
                 <h2 class="section-header text-2xl font-semibold text-gray-800 flex items-center">
                     <i class="fas fa-tractor text-green-600 mr-3"></i> Farm Details
                 </h2>
@@ -503,10 +517,19 @@
                         class="input-field w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         placeholder="Describe your farm, including types of crops, livestock, equipment, etc."></textarea>
                 </div>
+
+                <div class="flex justify-between mt-8">
+                    <button type="button" class="btn-secondary px-8 py-3 rounded-lg text-center font-semibold" onclick="previousSection(2)">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Section
+                    </button>
+                    <button type="button" class="btn-primary px-8 py-3 rounded-lg text-center font-semibold" onclick="nextSection(2)">
+                        Next Section <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
             </div>
             
             <!-- Section 3: Required Documents -->
-            <div class="form-section p-8 border-b border-gray-100">
+            <div class="form-section p-8 border-b border-gray-100 hidden" id="section3">
                 <h2 class="section-header text-2xl font-semibold text-gray-800 flex items-center">
                     <i class="fas fa-file-alt text-green-600 mr-3"></i> Required Documents
                 </h2>
@@ -605,10 +628,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="flex justify-between mt-8">
+                    <button type="button" class="btn-secondary px-8 py-3 rounded-lg text-center font-semibold" onclick="previousSection(3)">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Section
+                    </button>
+                    <button type="button" class="btn-primary px-8 py-3 rounded-lg text-center font-semibold" onclick="nextSection(3)">
+                        Next Section <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
             </div>
             
             <!-- Section 4: Terms and Submission -->
-            <div class="form-section p-8">
+            <div class="form-section p-8 hidden" id="section4">
                 <h2 class="section-header text-2xl font-semibold text-gray-800 flex items-center">
                     <i class="fas fa-check-circle text-green-600 mr-3"></i> Terms and Submission
                 </h2>
@@ -639,11 +671,10 @@
                     </div>
                 </div>
                 
-                <div class="flex flex-col sm:flex-row justify-between mt-8 gap-4">
-                    <button type="button" class="btn-secondary px-6 py-3 rounded-lg text-center">
-                        <i class="fas fa-save mr-2"></i> Save as Draft
+                <div class="flex justify-between mt-8">
+                    <button type="button" class="btn-secondary px-8 py-3 rounded-lg text-center font-semibold" onclick="previousSection(4)">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Section
                     </button>
-                    
                     <button type="submit" class="btn-primary px-8 py-3 rounded-lg text-center font-semibold">
                         <i class="fas fa-paper-plane mr-2"></i> Submit Registration
                     </button>
@@ -695,6 +726,107 @@
                         this.parentElement.classList.remove('border-green-300');
                     }
                 });
+            });
+        });
+    </script>
+    
+    <!-- Form Navigation Script -->
+    <script>
+        let currentSection = 1;
+        const totalSections = 4;
+
+        function showSection(sectionNumber) {
+            // Hide all sections
+            for (let i = 1; i <= totalSections; i++) {
+                document.getElementById(`section${i}`).classList.add('hidden');
+            }
+            // Show the requested section
+            document.getElementById(`section${sectionNumber}`).classList.remove('hidden');
+            
+            // Update progress steps
+            updateProgressSteps(sectionNumber);
+        }
+
+        function updateProgressSteps(currentSection) {
+            const steps = document.querySelectorAll('.progress-step');
+            steps.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index + 1 < currentSection) {
+                    step.classList.add('completed');
+                } else if (index + 1 === currentSection) {
+                    step.classList.add('active');
+                }
+            });
+        }
+
+        function validateSection(sectionNumber) {
+            const section = document.getElementById(`section${sectionNumber}`);
+            const requiredFields = section.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('border-red-500');
+                    // Add error message if not exists
+                    if (!field.nextElementSibling?.classList.contains('error-message')) {
+                        const errorMessage = document.createElement('p');
+                        errorMessage.className = 'error-message text-red-500 text-sm mt-1';
+                        errorMessage.textContent = 'This field is required';
+                        field.parentNode.insertBefore(errorMessage, field.nextSibling);
+                    }
+                } else {
+                    field.classList.remove('border-red-500');
+                    // Remove error message if exists
+                    const errorMessage = field.nextElementSibling;
+                    if (errorMessage?.classList.contains('error-message')) {
+                        errorMessage.remove();
+                    }
+                }
+            });
+
+            return isValid;
+        }
+
+        function nextSection(currentSectionNumber) {
+            if (validateSection(currentSectionNumber)) {
+                currentSection = currentSectionNumber + 1;
+                showSection(currentSection);
+                // Scroll to top of the form
+                document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function previousSection(currentSectionNumber) {
+            currentSection = currentSectionNumber - 1;
+            showSection(currentSection);
+            // Scroll to top of the form
+            document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize the form
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection(1);
+            
+            // Add input event listeners to remove error styling on input
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('border-red-500');
+                    const errorMessage = this.nextElementSibling;
+                    if (errorMessage?.classList.contains('error-message')) {
+                        errorMessage.remove();
+                    }
+                });
+            });
+
+            // Handle form submission
+            document.getElementById('registrationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (validateSection(4)) {
+                    // If all validations pass, submit the form
+                    this.submit();
+                }
             });
         });
     </script>
