@@ -19,4 +19,4 @@ Route::get('/login' , [UserController::class , "login"] )->name('login') ;
 Route::post('/signin' , [UserController::class , "sginIn"] )->name('signin') ; 
 
 Route::get('/ListeProducts' , [ProductController::class , "index"] )->name('ListeProducts') ; 
-Route::resource('/farmer' , FarmerController::class) ;
+Route::resource('/farmer' , FarmerController::class) ; 

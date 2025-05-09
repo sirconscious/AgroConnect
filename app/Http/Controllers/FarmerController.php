@@ -12,6 +12,9 @@ class FarmerController extends Controller
 {
     public function create(){
         return view("Farmer.Create");
+    } 
+    public function index(){
+        return view("Farmer.Dashbored");
     }
     public function store(Request $request){
         // dd($request->all());
@@ -78,6 +81,6 @@ class FarmerController extends Controller
             }
         }
 
-        return redirect()->route("ListeProducts")->with("success", "Registration successful! Your account is pending verification.");
+        return redirect()->route("farmer.index")->with("success", "Registration successful! Your account is pending verification.");
     }
 }
