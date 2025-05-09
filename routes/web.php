@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FarmerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -19,4 +20,5 @@ Route::get('/login' , [UserController::class , "login"] )->name('login') ;
 Route::post('/signin' , [UserController::class , "sginIn"] )->name('signin') ; 
 
 Route::get('/ListeProducts' , [ProductController::class , "index"] )->name('ListeProducts') ; 
-Route::resource('/farmer' , FarmerController::class) ; 
+Route::resource('/farmer' , FarmerController::class) ;  
+Route::get('/admin/farmer-registrations' , [AdminController::class , "index"] )->name('admin.farmer-registrations') ; 
