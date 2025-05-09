@@ -14,16 +14,16 @@
         <div class="flex items-center gap-3">
             <span class="text-sm text-gray-500">Quick filters:</span>
             <button class="px-3 py-2 bg-green-100 text-green-800 text-sm font-medium rounded-lg hover:bg-green-200 transition-colors">
-                All (125)
+                All ({{ $farmers->count() }})
             </button>
             <button class="px-3 py-2 bg-orange-100 text-orange-800 text-sm font-medium rounded-lg hover:bg-orange-200 transition-colors">
-                Pending (42)
+                Pending ({{ $farmers->where('status', 'pending')->count() }})
             </button>
             <button class="px-3 py-2 bg-blue-100 text-blue-800 text-sm font-medium rounded-lg hover:bg-blue-200 transition-colors">
-                Confirmed (68)
+                Confirmed ({{ $farmers->where('status', 'confirmed')->count() }})
             </button>
             <button class="px-3 py-2 bg-red-100 text-red-800 text-sm font-medium rounded-lg hover:bg-red-200 transition-colors">
-                Rejected (15)
+                Rejected ({{ $farmers->where('status', 'rejected')->count() }})
             </button>
         </div>
     </div>
@@ -164,15 +164,47 @@
             this.showFarmerDetails = false;
             this.currentFarmer = null;
         },
-        confirmFarmer(farmerId) {
-            // In a real app, this would be an AJAX call to update the status
-            console.log('Confirming farmer with ID:', farmerId);
-            // After confirmation, you might want to refresh the data or update the UI
+        async confirmFarmer(farmerId) {
+            try {
+                const response = await fetch(`/admin/farmers/${farmerId}/confirm`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name=\"csrf-token\"]').content,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Failed to confirm farmer. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
         },
-        rejectFarmer(farmerId) {
-            // In a real app, this would be an AJAX call to update the status
-            console.log('Rejecting farmer with ID:', farmerId);
-            // After rejection, you might want to refresh the data or update the UI
+        async rejectFarmer(farmerId) {
+            try {
+                const response = await fetch(`/admin/farmers/${farmerId}/reject`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name=\"csrf-token\"]').content,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    alert('Failed to reject farmer. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
         }
     }">
         <div class="relative w-full overflow-auto">
@@ -198,136 +230,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                    $farmers = [
-                        [
-                            'id' => '1',
-                            'firstName' => 'Mohammed',
-                            'lastName' => 'Alami',
-                            'email' => 'mohammed.alami@example.com',
-                            'cin' => 'AB123456',
-                            'phone' => '+212 612345678',
-                            'dob' => '1975-05-15',
-                            'address' => 'Douar Ouled Saleh, Commune Sidi Moussa Ben Ali, Province El Jadida',
-                            'farmName' => 'Ferme Alami',
-                            'farmLocation' => 'El Jadida',
-                            'farmSize' => '12.5',
-                            'farmingActivities' => ['vegetables', 'fruits'],
-                            'farmDescription' => 'Family-owned farm specializing in organic vegetables and citrus fruits.',
-                            'status' => 'pending',
-                            'dateApplied' => '2023-06-15',
-                            'documents' => [
-                                'nationalId' => 'documents/national_id_1.pdf',
-                                'farmerCertificate' => 'documents/farmer_certificate_1.pdf',
-                                'landDocument' => 'documents/land_document_1.pdf',
-                                'oncaAttestation' => 'documents/onca_attestation_1.pdf',
-                                'agriculturalRegister' => 'documents/agricultural_register_1.pdf',
-                                'farmDetailsDoc' => 'documents/farm_details_1.pdf',
-                            ]
-                        ],
-                        [
-                            'id' => '2',
-                            'firstName' => 'Fatima',
-                            'lastName' => 'Benali',
-                            'email' => 'fatima.benali@example.com',
-                            'cin' => 'CD789012',
-                            'phone' => '+212 623456789',
-                            'dob' => '1982-09-23',
-                            'address' => 'Douar Ait Lahcen, Commune Oulad Teima, Province Taroudant',
-                            'farmName' => 'Domaine Benali',
-                            'farmLocation' => 'Taroudant',
-                            'farmSize' => '8.3',
-                            'farmingActivities' => ['vegetables', 'poultry'],
-                            'farmDescription' => 'Small farm producing vegetables and raising free-range chickens.',
-                            'status' => 'pending',
-                            'dateApplied' => '2023-06-18',
-                            'documents' => [
-                                'nationalId' => 'documents/national_id_2.pdf',
-                                'farmerCertificate' => 'documents/farmer_certificate_2.pdf',
-                                'landDocument' => 'documents/land_document_2.pdf',
-                                'oncaAttestation' => null,
-                                'agriculturalRegister' => 'documents/agricultural_register_2.pdf',
-                                'farmDetailsDoc' => 'documents/farm_details_2.pdf',
-                            ]
-                        ],
-                        [
-                            'id' => '3',
-                            'firstName' => 'Ahmed',
-                            'lastName' => 'Tazi',
-                            'email' => 'ahmed.tazi@example.com',
-                            'cin' => 'EF345678',
-                            'phone' => '+212 634567890',
-                            'dob' => '1968-12-10',
-                            'address' => 'Douar Ait Amira, Commune Chtouka, Province Agadir',
-                            'farmName' => 'Tazi Agri',
-                            'farmLocation' => 'Agadir',
-                            'farmSize' => '25.0',
-                            'farmingActivities' => ['fruits', 'dairy'],
-                            'farmDescription' => 'Large farm with citrus orchards and dairy production.',
-                            'status' => 'confirmed',
-                            'dateApplied' => '2023-06-10',
-                            'documents' => [
-                                'nationalId' => 'documents/national_id_3.pdf',
-                                'farmerCertificate' => 'documents/farmer_certificate_3.pdf',
-                                'landDocument' => 'documents/land_document_3.pdf',
-                                'oncaAttestation' => 'documents/onca_attestation_3.pdf',
-                                'agriculturalRegister' => 'documents/agricultural_register_3.pdf',
-                                'farmDetailsDoc' => 'documents/farm_details_3.pdf',
-                            ]
-                        ],
-                        [
-                            'id' => '4',
-                            'firstName' => 'Karim',
-                            'lastName' => 'Idrissi',
-                            'email' => 'karim.idrissi@example.com',
-                            'cin' => 'GH901234',
-                            'phone' => '+212 645678901',
-                            'dob' => '1985-03-28',
-                            'address' => 'Douar Beni Chiker, Commune Beni Chiker, Province Nador',
-                            'farmName' => 'Ferme Idrissi',
-                            'farmLocation' => 'Nador',
-                            'farmSize' => '5.7',
-                            'farmingActivities' => ['vegetables'],
-                            'farmDescription' => 'Small vegetable farm specializing in tomatoes and peppers.',
-                            'status' => 'rejected',
-                            'dateApplied' => '2023-06-05',
-                            'documents' => [
-                                'nationalId' => 'documents/national_id_4.pdf',
-                                'farmerCertificate' => 'documents/farmer_certificate_4.pdf',
-                                'landDocument' => 'documents/land_document_4.pdf',
-                                'oncaAttestation' => null,
-                                'agriculturalRegister' => null,
-                                'farmDetailsDoc' => 'documents/farm_details_4.pdf',
-                            ]
-                        ],
-                        [
-                            'id' => '5',
-                            'firstName' => 'Samira',
-                            'lastName' => 'Ouazzani',
-                            'email' => 'samira.ouazzani@example.com',
-                            'cin' => 'IJ567890',
-                            'phone' => '+212 656789012',
-                            'dob' => '1979-07-12',
-                            'address' => 'Douar Ait Baamrane, Commune Sidi Bibi, Province Chtouka-Ait Baha',
-                            'farmName' => 'Ouazzani Bio',
-                            'farmLocation' => 'Chtouka-Ait Baha',
-                            'farmSize' => '15.2',
-                            'farmingActivities' => ['fruits', 'vegetables', 'other'],
-                            'farmDescription' => 'Organic farm producing a variety of fruits and vegetables for local markets.',
-                            'status' => 'pending',
-                            'dateApplied' => '2023-06-20',
-                            'documents' => [
-                                'nationalId' => 'documents/national_id_5.pdf',
-                                'farmerCertificate' => 'documents/farmer_certificate_5.pdf',
-                                'landDocument' => 'documents/land_document_5.pdf',
-                                'oncaAttestation' => 'documents/onca_attestation_5.pdf',
-                                'agriculturalRegister' => 'documents/agricultural_register_5.pdf',
-                                'farmDetailsDoc' => 'documents/farm_details_5.pdf',
-                            ]
-                        ],
-                    ];
-                    @endphp
-
                     @foreach ($farmers as $farmer)
                     <tr class="border-t border-gray-200 hover:bg-gray-50">
                         <td class="px-4 py-3">
@@ -390,7 +292,7 @@
         </div>
         <div class="flex items-center justify-between p-5 border-t">
             <div class="text-sm text-gray-500">
-                Showing <strong>5</strong> of <strong>42</strong> farmers
+                Showing <strong>{{ $farmers->count() }}</strong> of <strong>{{ $farmers->count() }}</strong> farmers
             </div>
             <div class="flex items-center gap-2">
                 <button 
@@ -554,7 +456,7 @@
                                                     <i class="fas fa-id-card text-gray-400 mr-3"></i>
                                                     <span class="text-sm font-medium text-gray-700">National ID (CIN)</span>
                                                 </div>
-                                                <div class="flex items-center gap-2">
+                                                <div class="flex items-center gap-2" x-show="currentFarmer?.documents.nationalId">
                                                     <a 
                                                         :href="currentFarmer?.documents.nationalId" 
                                                         target="_blank" 
@@ -570,6 +472,12 @@
                                                         <i class="fas fa-download"></i>
                                                     </a>
                                                 </div>
+                                                <span 
+                                                    x-show="!currentFarmer?.documents.nationalId" 
+                                                    class="text-sm text-gray-500"
+                                                >
+                                                    Not provided
+                                                </span>
                                             </div>
                                             
                                             <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
@@ -577,7 +485,7 @@
                                                     <i class="fas fa-certificate text-gray-400 mr-3"></i>
                                                     <span class="text-sm font-medium text-gray-700">Farmer Certificate</span>
                                                 </div>
-                                                <div class="flex items-center gap-2">
+                                                <div class="flex items-center gap-2" x-show="currentFarmer?.documents.farmerCertificate">
                                                     <a 
                                                         :href="currentFarmer?.documents.farmerCertificate" 
                                                         target="_blank" 
@@ -593,6 +501,12 @@
                                                         <i class="fas fa-download"></i>
                                                     </a>
                                                 </div>
+                                                <span 
+                                                    x-show="!currentFarmer?.documents.farmerCertificate" 
+                                                    class="text-sm text-gray-500"
+                                                >
+                                                    Not provided
+                                                </span>
                                             </div>
                                             
                                             <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
@@ -600,7 +514,7 @@
                                                     <i class="fas fa-file-contract text-gray-400 mr-3"></i>
                                                     <span class="text-sm font-medium text-gray-700">Land Document</span>
                                                 </div>
-                                                <div class="flex items-center gap-2">
+                                                <div class="flex items-center gap-2" x-show="currentFarmer?.documents.landDocument">
                                                     <a 
                                                         :href="currentFarmer?.documents.landDocument" 
                                                         target="_blank" 
@@ -616,6 +530,12 @@
                                                         <i class="fas fa-download"></i>
                                                     </a>
                                                 </div>
+                                                <span 
+                                                    x-show="!currentFarmer?.documents.landDocument" 
+                                                    class="text-sm text-gray-500"
+                                                >
+                                                    Not provided
+                                                </span>
                                             </div>
                                             
                                             <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200">
@@ -681,7 +601,7 @@
                                                     <i class="fas fa-file-alt text-gray-400 mr-3"></i>
                                                     <span class="text-sm font-medium text-gray-700">Farm Details Document</span>
                                                 </div>
-                                                <div class="flex items-center gap-2">
+                                                <div class="flex items-center gap-2" x-show="currentFarmer?.documents.farmDetailsDoc">
                                                     <a 
                                                         :href="currentFarmer?.documents.farmDetailsDoc" 
                                                         target="_blank" 
@@ -697,6 +617,12 @@
                                                         <i class="fas fa-download"></i>
                                                     </a>
                                                 </div>
+                                                <span 
+                                                    x-show="!currentFarmer?.documents.farmDetailsDoc" 
+                                                    class="text-sm text-gray-500"
+                                                >
+                                                    Not provided
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
