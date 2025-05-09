@@ -26,6 +26,7 @@ Route::get('/admin/farmer-registrations' , [AdminController::class , "index"] )-
 // Admin Routes
 Route::prefix('admin')->group(function () {
     Route::get('/farmer-registrations', [AdminController::class, 'index'])->name('admin.farmer-registrations');
+    Route::get('/farmers/{id}/details', [AdminController::class, 'showDetails'])->name('admin.farmers.details');
     Route::post('/farmers/{id}/confirm', [AdminController::class, 'confirmFarmer'])->name('admin.farmers.confirm');
     Route::post('/farmers/{id}/reject', [AdminController::class, 'rejectFarmer'])->name('admin.farmers.reject');
 });

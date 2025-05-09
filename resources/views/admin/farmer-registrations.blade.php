@@ -258,13 +258,13 @@
                         <td class="px-4 py-3 text-gray-700">{{ $farmer['dateApplied'] }}</td>
                         <td class="px-4 py-3 text-right">
                             <div class="flex items-center justify-end gap-2">
-                                <button 
-                                    @click="viewFarmerDetails({{ json_encode($farmer) }})"
+                                <a 
+                                    href="{{ route('admin.farmers.details', $farmer['id']) }}"
                                     class="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors"
                                     title="View Details"
                                 >
                                     <i class="fas fa-eye"></i>
-                                </button>
+                                </a>
                                 
                                 @if($farmer['status'] === 'pending')
                                 <button 
