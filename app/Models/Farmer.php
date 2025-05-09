@@ -10,4 +10,10 @@ class Farmer extends Model
         "cin" , "phone" , "date_of_birth" 
         , "address"  , "user_id" , 
     ] ;
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function farms(){
+        return $this->hasOne(Farm::class);
+    }
 }
